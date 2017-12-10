@@ -56,8 +56,18 @@ with indent(3):
     except TwitterSearchException as e: # take care of all those ugly errors if there are some
         print(e)
 
+# "#something since:2014-01-01 until:2014-02-02"
+def formatSearchString(searchSpecString):
+    searchParams = searchSpecString.split()
+    x = list(searchParams[1])
+    x[5] = '_'
+    searchParams[1] = "".join(x)
+    x = list(searchParams[2])
+    x[5] = '_'
+    searchParams[2] = "".join(x)
+    return '_'.join(searchParams)
 
-filename = u'twitter-search-%s.csv' % (' '.join(SEARCH_SPEC.all))
+filename = u'%s.csv' % (formatSearchString(' '.join(SEARCH_SPEC.all)))
 with open(filename, 'wb') as f:
     f.write(sheet.csv)
 
