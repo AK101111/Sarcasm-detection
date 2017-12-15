@@ -1,4 +1,2 @@
-./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "twitter-to-csv-master/#sarcasm_since_2013-10-01_until_2017-10-31cleaned.txt" >> "posTags/sarcasm1031.txt"
-./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "twitter-to-csv-master/#sarcasm_since_2017-10-31_until_2017-12-05cleaned.txt" >> "posTags/sarcasm1205.txt"
-./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "twitter-to-csv-master/#sarcastic_since_2013-10-01_until_2017-10-31cleaned.txt" >> "posTags/sarcastic1031.txt"
-./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "twitter-to-csv-master/#sarcastic_since_2017-10-31_until_2017-12-05cleaned.txt" >> "posTags/sarcastic1205.txt"
+./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "data/clean/notsarcasmcleaned.txt" >> "posTags/notsarcasmpos.txt"
+./ark-tweet-nlp-0.3.2/runTagger.sh --output-format conll "data/clean/sarcasmcleaned.txt" >> "posTags/sarcasmpos.txt"

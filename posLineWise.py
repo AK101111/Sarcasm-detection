@@ -1,13 +1,8 @@
 import csv
-import re
-import string
-import preprocessor
 
 DATADIR = '/Users/arnavkansal/Desktop/Courant/Fall17/StatNLP/Sarcasm/posTags/'
-dataFiles = [	'sarcasm1031', 
-				'sarcasm1205', 
-				'sarcastic1031', 
-				'sarcastic1205']
+dataFiles = [	'sarcasmpos',
+				'notsarcasmpos']
 
 for dataFile in dataFiles:
 	final = []
@@ -19,6 +14,6 @@ for dataFile in dataFiles:
 		else:
 			final.append(ll)
 			ll = []
-	with open(DATADIR + dataFile + ".csv", "wb") as f:
+	with open(DATADIR + dataFile + "linewise" ".csv", "wb") as f:
 		writer = csv.writer(f)
 		writer.writerows(final)
