@@ -86,7 +86,7 @@ for dataFile in dataFilesI:
 		
 		with open(DATADIR + dataFile + "cleaned.txt",'wb') as textfile:
 			for sentences in dataSarcasm:
-  				textfile.write("%s\n" % sentences)
+  				textfilels.write("%s\n" % sentences)
 
 		with open(DATADIR + dataFile + "cleaned.csv",'wb') as resultFile:
 			wr = csv.writer(resultFile)
