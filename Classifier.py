@@ -5,8 +5,8 @@ from numpy import genfromtxt
 import matplotlib.pyplot as plt
 
 DATADIR = '/Users/nitishagarwal/Desktop/StatNLP/Project/Sarcasm-detection/vector_rep/'
-file1 = 'sarcasmcleanedvecs300000-300'
-file0 = 'notsarcasmcleanedvecs30000-300'
+file1 = 'sarcasmcleanedvecs3000000-300'
+file0 = 'notsarcasmcleanedvecs300000-300'
 
 training_sarcastic = 50000
 training_non_sarcastic = 50000
