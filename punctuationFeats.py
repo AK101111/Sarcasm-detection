@@ -76,12 +76,12 @@ for dataFile in dataFiles:
 			feat.append(countAllCaps(row))
 			feat.append(countVowelRepeat(row))
 			feat.append(len(row.split()))
-			feat += countHappyEmoticonFeats(row, ['😃', '😀', '🙃', '😊', '😀', '😇'])
-			feat += countFunnyEmoticonFeats(row, ['😂', '🤣', '😝', '😜', '😋', '😛', '😁'])
-			feat += countLikeEmoticonFeats(row, ['👍', '😍', '😻', '💕', '💞', '❤', '💖', '💓', '👌'])
-			feat += countWonderEmoticonFeats(row, ['😮', '😯', '😲', '🤔', '😳', '🙄', '🤷'])
-			feat += countNegativeEmoticonFeats(row, ['😭', '😠', '😫', '😩', '😔', '😪', '😢', '😰', '😱', '🖕', '💔'])
-			feat += countOtherEmoticonFeats(row, ['😅', '😎', '😏', '😒', '😐', '🙄', '😕', '😬', '😉', '😷', '👊', '🙌', '🙏', '👏', '🔥', '✨', '🙈', '🎃', '👻', '💀', '💩'])
+			feat += [sum(countHappyEmoticonFeats(row, ['😃', '😀', '🙃', '😊', '😀', '😇']))]
+			feat += [sum(countFunnyEmoticonFeats(row, ['😂', '🤣', '😝', '😜', '😋', '😛', '😁']))]
+			feat += [sum(countLikeEmoticonFeats(row, ['👍', '😍', '😻', '💕', '💞', '❤', '💖', '💓', '👌']))]
+			feat += [sum(countWonderEmoticonFeats(row, ['😮', '😯', '😲', '🤔', '😳', '🙄', '🤷']))]
+			feat += [sum(countNegativeEmoticonFeats(row, ['😭', '😠', '😫', '😩', '😔', '😪', '😢', '😰', '😱', '🖕', '💔']))]
+			feat += [sum(countOtherEmoticonFeats(row, ['😅', '😎', '😏', '😒', '😐', '🙄', '😕', '😬', '😉', '😷', '👊', '🙌', '🙏', '👏', '🔥', '✨', '🙈', '🎃', '👻', '💀', '💩']))]
 			feats.append(feat)
 		print ct
 		print len(feats)
