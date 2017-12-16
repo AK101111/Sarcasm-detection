@@ -1,7 +1,15 @@
-import csv
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# encoding=utf8
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
-DATADIR = '/Users/nitishagarwal/Desktop/StatNLP/Project/Sarcasm-Detection/data/clean/'
-dataFile = 'sarcasmcleaned.txt'
+import csv
+import codecs
+
+DATADIR = '/Users/arnavkansal/Desktop/Courant/Fall17/StatNLP/Sarcasm-detection/'
+dataFiles = ['sarcasmcleaned','notsarcasmcleaned']
 
 def countPunctuationFeats(dataPt, punctuations):
 	return [dataPt.count(punctuation) for punctuation in punctuations]
@@ -58,34 +66,25 @@ def countNegativeEmoticonFeats(dataPt, negativeEmoticons):
 def countOtherEmoticonFeats(dataPt, otherEmoticons):
 	return [dataPt.count(otherEmoticon) for otherEmoticon in otherEmoticons]
 
-with open(DATADIR + dataFile, 'rb') as csvfile:
+for dataFile in dataFiles:
 	feats = []
-	reader = csv.reader(csvfile, delimiter = ',')
-	ct = 0
-	for row in reader:
-		#print row[0]
-		feat = countPunctuationFeats(row[0], ['?', '!', '.', ',', '"', "'"])
-		feat.append(countAllCaps(row[0]))
-		feat.append(countVowelRepeat(row[0]))
-		feat.append(len(row[0].split()))
-		feat.append(countHappyEmoticonFeats(row[0], ['😃', '😀', '🙃', '😊', '😀', '😇']))
-		feat.append(countFunnyEmoticonFeats(row[0], ['😂', '🤣', '😝', '😜', '😋', '😛', '😁']))
-		feat.append(countLikeEmoticonFeats(row[0], ['👍', '😍', '😻', '💕', '💞', '❤', '💖', '💓', '👌']))
-		feat.append(countWonderEmoticonFeats(row[0], ['😮', '😯', '😲', '🤔', '😳', '🙄', '🤷']))
-		feat.append(countNegativeEmoticonFeats(row[0], ['😭', '😠', '😫', '😩', '😔', '😪', '😢', '😰', '😱', '🖕', '💔']))
-		feat.append(countOtherEmoticonFeats(row[0], ['😅', '😎', '😏', '😒', '😐', '🙄', '😕', '😬', '😉', '😷', '👊', '🙌', '🙏', '👏', '🔥', '✨', '🙈', '🎃', '👻', '💀', '💩']))
-		feats.append(feat)
-	print(feats)
-	#for feat in feats:
-	#	print(feat)
-	
-
-	#write feats to file
-	# with open(DATADIR + dataFile + "cleaned.txt",'wb') as textfile:
-	# 	for sentences in dataSarcasm:
- 		# 		textfilels.write("%s\n" % sentences)
-
-	# with open(DATADIR + dataFile + "cleaned.csv",'wb') as resultFile:
-	# 	wr = csv.writer(resultFile)
-	# 	for sentences in dataSarcasm:
-	# 		wr.writerow([sentences])
+	with codecs.open(DATADIR + "data/clean/" + dataFile + ".txt", encoding="utf-8") as csvfile:	
+		ct = 0
+		for row in csvfile:
+			ct += 1
+			feat = countPunctuationFeats(row, ['?', '!', '.', ',', '"', "'"])
+			feat.append(countAllCaps(row))
+			feat.append(countVowelRepeat(row))
+			feat.append(len(row.split()))
+			feat += countHappyEmoticonFeats(row, ['😃', '😀', '🙃', '😊', '😀', '😇'])
+			feat += countFunnyEmoticonFeats(row, ['😂', '🤣', '😝', '😜', '😋', '😛', '😁'])
+			feat += countLikeEmoticonFeats(row, ['👍', '😍', '😻', '💕', '💞', '❤', '💖', '💓', '👌'])
+			feat += countWonderEmoticonFeats(row, ['😮', '😯', '😲', '🤔', '😳', '🙄', '🤷'])
+			feat += countNegativeEmoticonFeats(row, ['😭', '😠', '😫', '😩', '😔', '😪', '😢', '😰', '😱', '🖕', '💔'])
+			feat += countOtherEmoticonFeats(row, ['😅', '😎', '😏', '😒', '😐', '🙄', '😕', '😬', '😉', '😷', '👊', '🙌', '🙏', '👏', '🔥', '✨', '🙈', '🎃', '👻', '💀', '💩'])
+			feats.append(feat)
+		print ct
+		print len(feats)
+	with open(DATADIR + "hackyfeats/" + dataFile + "hackfeats.csv",'wb') as fii:    
+		wr = csv.writer(fii)
+		wr.writerows(feats)
