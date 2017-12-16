@@ -1,5 +1,5 @@
 SVM Classifier, RBF Kernel,,,,,,
-,,,,,,,
+Gamma = 2,,,,,,,
 All 8 embedding features,,,,,,,
 C,Precision Non- Sarcastic,Precision Sarcastic,Recall Non-Sarcastic,Recall Sarcastic,Average Precision,Average Recall,F Score
 0.1,0.98430215,0.02203615,0.3981939,0.6810534,0.50316915,0.53962365,0.520759202
@@ -23,3 +23,8 @@ C,Precision Non- Sarcastic,Precision Sarcastic,Recall Non-Sarcastic,Recall Sarca
 10,0.98537018,0.02108058,0.24280382,0.8189466,0.50322538,0.53087521,0.516680644
 100,0.9849872,0.02124197,0.27737096,0.78767374,0.503114585,0.53252235,0.517400939
 1000,0.98520293,0.02144317,0.29044697,0.7809071,0.50332305,0.535677035,0.518996298
+,,,,,,,
+Gamma = 10,,,,,,,
+All 8 embedding features,,,,,,,
+C,Precision Non- Sarcastic,Precision Sarcastic,Recall Non-Sarcastic,Recall Sarcastic,Average Precision,Average Recall,F Score
+1000,0.98569759,0.02489512,0.50993901,0.62838332,0.505296355,0.569161165,0.535330726
