@@ -46,12 +46,12 @@ y_test = y_sartest + y_Nsartest
 #from sklearn.utils import shuffle
 #X_train, y_train = shuffle(X_train, y_train)
 
-max_length = 40
+max_length = 30
 X_train = sequence.pad_sequences(X_train, maxlen=max_length)
 X_test = sequence.pad_sequences(X_test, maxlen=max_length)
 
 model = Sequential()
-model.add(Embedding(60, 40, input_length=40))
+model.add(Embedding(80, 50, input_length=30))
 model.add(LSTM(20, name = "LSTM"))
 model.add(Dense(1, activation='sigmoid'))
 
@@ -93,6 +93,11 @@ np.savetxt("nonsarcasticLSTM20.csv", intermediate_outputI, delimiter=",")
 # Final evaluation of the model
 y_score = model.predict(X_test)
 y_score = [int(round(u[0])) for u in y_score]
+
+p1 = (np.dot(y_score, y_test))/ (np.linalg.norm(y_score)**2)
+r1 = (np.dot(y_score, y_test))/ (np.linalg.norm(y_test)**2)
+p0 = (np.dot(1-np.array(y_score), 1-np.array(y_test)))/ (np.linalg.norm(1-np.array(y_score))**2)
+r0 = (np.dot(1-np.array(y_score), 1-np.array(y_test)))/ (np.linalg.norm(1-np.array(y_test))**2)
 
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))

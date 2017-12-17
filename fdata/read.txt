@@ -1,0 +1,9 @@
+# hack
+# hack + pwnw
+# joshi
+# hack + joshi
+# hack + pwnw + joshi
+# pos
+# senti
+# pos + senti
+# hack + pwnw + joshi + pos + senti
