@@ -64,7 +64,7 @@ X_train = sequence.pad_sequences(X_train, maxlen=max_length)
 X_test = sequence.pad_sequences(X_test, maxlen=max_length)
 
 model = Sequential()
-model.add(Embedding(80, 50, input_length=30))
+model.add(Embedding(25, 50, input_length=30))
 model.add(LSTM(20, name = "LSTM"))
 model.add(Dense(1, activation='sigmoid'))
 
@@ -100,8 +100,8 @@ intermediate_layer_model = Model(inputs=model.input,
 
 intermediate_output = intermediate_layer_model.predict(np.array(sequence.pad_sequences(X_sar, maxlen=max_length)))
 intermediate_outputI = intermediate_layer_model.predict(np.array(sequence.pad_sequences(X_Nsar, maxlen=max_length)))
-np.savetxt("posTags/possarcasticLSTM20.csv", intermediate_output, delimiter=",")
-np.savetxt("posTags/posnonsarcasticLSTM20.csv", intermediate_outputI, delimiter=",")
+np.savetxt("posTags/possarcasticLSTM25-20.csv", intermediate_output, delimiter=",")
+np.savetxt("posTags/posnonsarcasticLSTM25-20.csv", intermediate_outputI, delimiter=",")
 
 # Final evaluation of the model
 y_score = model.predict(X_test)
