@@ -1,29 +1,49 @@
 from sklearn import svm
+from sklearn.svm import LinearSVC
 from sklearn.metrics import precision_recall_fscore_support
 import numpy as np
 from numpy import genfromtxt
 import matplotlib.pyplot as plt
 
-DATADIR = '/Users/nitishagarwal/Desktop/StatNLP/Project/Sarcasm-detection/vector_rep/'
-file1 = 'sarcasmcleanedvecs3000000-300'
-file0 = 'notsarcasmcleanedvecs300000-300'
+DATADIR = '/Users/nitishagarwal/Desktop/StatNLP/Project/Sarcasm-detection/fdata/'
+
+file11 = 'joshi3M'
+file10 = 'Njoshi3M'
+file21 = 'pwnw'
+file20 = 'Npwnw'
+file31 = 'hack'
+file30 = 'Nhack'
+file41 = 'sentiLSTM'
+file40 = 'NsentiLSTM'
+file51 = 'posLSTM'
+file50 = 'NposLSTM'
 
 training_sarcastic = 50000
 training_non_sarcastic = 50000
 
-X_train1 = genfromtxt(DATADIR + file1 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
-X_train0 = genfromtxt(DATADIR + file0 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train11 = genfromtxt(DATADIR + file11 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
+X_train10 = genfromtxt(DATADIR + file10 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train21 = genfromtxt(DATADIR + file21 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
+X_train20 = genfromtxt(DATADIR + file20 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train31 = genfromtxt(DATADIR + file31 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
+X_train30 = genfromtxt(DATADIR + file30 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train41 = genfromtxt(DATADIR + file41 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
+X_train40 = genfromtxt(DATADIR + file40 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train51 = genfromtxt(DATADIR + file51 + '.csv', delimiter = ',')	#Features for sarcastic training dataset
+X_train50 = genfromtxt(DATADIR + file50 + '.csv', delimiter = ',')	#Features for non-sarcastic training dataset
+X_train1 = np.concatenate((X_train11, X_train21, X_train31, X_train41, X_train51), axis = 1)
+X_train0 = np.concatenate((X_train10, X_train20, X_train30, X_train40, X_train50), axis = 1)
 X_train = np.concatenate((X_train1[0 : training_sarcastic], X_train0[0 : training_non_sarcastic]))
 X_test = np.concatenate((X_train1[training_sarcastic : X_train1.shape[0]], X_train0[training_non_sarcastic : X_train0.shape[0]]))
 Y = [1] * training_sarcastic + [0] * training_non_sarcastic			#True Labels 1 for sarcasm and 0 for plain text
 Y_true = [1] * (X_train1.shape[0] - training_sarcastic) + [0] * (X_train0.shape[0] - training_non_sarcastic)
 
-clf = svm.SVC(kernel = 'rbf', gamma = 2)
-clf.fit(X_train, Y)
+#clf = svm.SVC(kernel = 'rbf', gamma = 2, C = 1000.0)
 
+clf = LinearSVC(random_state = 0)
+clf.fit(X_train, Y)
 Y_pred = clf.predict(X_test)										#Predicted Labels 1 for sarcasm and 0 for plain text
 f_score = precision_recall_fscore_support(Y_true, Y_pred)
-
 print(f_score)
 
 #fignum = 1
